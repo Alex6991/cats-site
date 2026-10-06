@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60" width="100" height="60">
+  <!-- Тело -->
+  <ellipse cx="50" cy="38" rx="28" ry="14" fill="#f5a623"/>
+  <!-- Голова -->
+  <circle cx="24" cy="30" r="12" fill="#f5a623"/>
+  <!-- Уши -->
+  <polygon points="16,20 20,10 26,20" fill="#f5a623"/>
+  <polygon points="28,20 32,10 38,20" fill="#f5a623"/>
+  <polygon points="18,20 20,13 24,20" fill="#ffb3a1"/>
+  <polygon points="29,20 32,13 35,20" fill="#ffb3a1"/>
+  <!-- Глаз -->
+  <circle cx="20" cy="29" r="1.8" fill="#222"/>
+  <circle cx="28" cy="29" r="1.8" fill="#222"/>
+  <!-- Нос -->
+  <polygon points="23,33 25,33 24,35" fill="#e26a6a"/>
+  <!-- Усы -->
+  <line x1="14" y1="32" x2="18" y2="33" stroke="#222" stroke-width="0.5"/>
+  <line x1="14" y1="35" x2="18" y2="35" stroke="#222" stroke-width="0.5"/>
+  <!-- Лапы -->
+  <ellipse cx="35" cy="50" rx="4" ry="6" fill="#f5a623"/>
+  <ellipse cx="48" cy="52" rx="4" ry="6" fill="#f5a623"/>
+  <ellipse cx="62" cy="52" rx="4" ry="6" fill="#f5a623"/>
+  <ellipse cx="72" cy="50" rx="4" ry="6" fill="#f5a623"/>
+  <!-- Хвост -->
+  <path d="M 78 35 Q 92 30 88 18" stroke="#f5a623" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Полоски -->
+  <path d="M 40 28 Q 42 24 44 28" stroke="#d48818" stroke-width="1.5" fill="none"/>
+  <path d="M 50 27 Q 52 23 54 27" stroke="#d48818" stroke-width="1.5" fill="none"/>
+</svg>

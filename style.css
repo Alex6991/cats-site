@@ -1,0 +1,551 @@
+/* --- ОБЩИЕ НАСТРОЙКИ --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #fdf6ec;
+    color: #3b2f2f;
+    line-height: 1.6;
+}
+
+h1, h2, h3 { color: #5a3e2b; }
+
+section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+/* --- БЕГАЮЩИЕ КОТЫ (SVG) --- */
+.runner {
+    position: fixed;
+    width: 90px;
+    height: 55px;
+    pointer-events: none;
+    user-select: none;
+    z-index: 5;
+    opacity: 0.9;
+}
+
+.runner-top {
+    top: 10px;
+    left: -100px;
+    animation: runTop 18s linear 2s infinite;
+}
+
+.runner-bottom {
+    bottom: 10px;
+    right: -100px;
+    animation: runBottom 22s linear 5s infinite;
+}
+
+@keyframes runTop {
+    0%   { left: -100px; transform: scaleX(1) translateY(0); }
+    10%  { left: 20%;    transform: scaleX(1) translateY(-4px); }
+    20%  { left: 30%;    transform: scaleX(1) translateY(0); }
+    30%  { left: 50%;    transform: scaleX(1) translateY(-4px); }
+    45%  { left: 100%;   transform: scaleX(1) translateY(0); }
+    50%  { left: 100%;   transform: scaleX(1) translateY(0); }
+    50.1%{ left: 100%;   transform: scaleX(-1) translateY(0); }
+    60%  { left: 70%;    transform: scaleX(-1) translateY(-4px); }
+    70%  { left: 50%;    transform: scaleX(-1) translateY(0); }
+    80%  { left: 30%;    transform: scaleX(-1) translateY(-4px); }
+    95%  { left: -100px; transform: scaleX(-1) translateY(0); }
+    100% { left: -100px; transform: scaleX(-1) translateY(0); }
+}
+
+@keyframes runBottom {
+    0%   { right: -100px; transform: scaleX(-1) translateY(0); }
+    10%  { right: 20%;    transform: scaleX(-1) translateY(-4px); }
+    20%  { right: 30%;    transform: scaleX(-1) translateY(0); }
+    30%  { right: 50%;    transform: scaleX(-1) translateY(-4px); }
+    45%  { right: 100%;   transform: scaleX(-1) translateY(0); }
+    50%  { right: 100%;   transform: scaleX(-1) translateY(0); }
+    50.1%{ right: 100%;   transform: scaleX(1) translateY(0); }
+    60%  { right: 70%;    transform: scaleX(1) translateY(-4px); }
+    70%  { right: 50%;    transform: scaleX(1) translateY(0); }
+    80%  { right: 30%;    transform: scaleX(1) translateY(-4px); }
+    95%  { right: -100px; transform: scaleX(1) translateY(0); }
+    100% { right: -100px; transform: scaleX(1) translateY(0); }
+}
+
+/* --- HERO --- */
+.hero {
+    background: linear-gradient(135deg, #ffe0b2, #ffccbc);
+    text-align: center;
+    padding: 100px 20px;
+    border-bottom-left-radius: 50% 80px;
+    border-bottom-right-radius: 50% 80px;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin-bottom: 15px;
+    color: #4e342e;
+}
+
+.hero p {
+    font-size: 1.2em;
+    color: #6d4c41;
+}
+
+.hero-cats {
+    font-size: 3em;
+    margin-top: 25px;
+    animation: wave 2s ease-in-out infinite;
+}
+
+@keyframes wave {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* --- КОТЫ (ГАЛЕРЕЯ) --- */
+.cats h2, .fact h2, .contacts h2 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 40px;
+}
+
+.cats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.cat-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.cat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.cat-photo {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    object-position: center 20%;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.cat-photo:hover {
+    transform: scale(1.02);
+}
+
+.cat-card h3 {
+    font-size: 1.5em;
+    margin-bottom: 8px;
+}
+
+.cat-meta {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    font-size: 0.9em;
+    color: #8d6e63;
+    margin-bottom: 12px;
+}
+
+.cat-meta span {
+    background: #fbe9e7;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+/* --- МИНИАТЮРЫ --- */
+.cat-thumbs {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    justify-content: center;
+}
+
+.cat-thumbs img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s, transform 0.2s;
+    border: 2px solid transparent;
+}
+
+.cat-thumbs img:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+    border-color: #5d4037;
+}
+
+/* --- КНОПКИ ДЕЙСТВИЙ --- */
+.cat-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 15px 0;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    padding: 10px 18px;
+    background: #5d4037;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.95em;
+    transition: background 0.3s, transform 0.15s;
+    font-family: inherit;
+}
+
+.action-btn:hover {
+    background: #4e342e;
+    transform: translateY(-2px);
+}
+
+.action-btn:active {
+    transform: scale(0.95);
+}
+
+/* --- СЧЁТЧИКИ --- */
+.cat-stats {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    font-size: 0.9em;
+    color: #6d4c41;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.cat-stats strong {
+    color: #3e2723;
+}
+
+/* --- СООБЩЕНИЯ --- */
+.cat-message {
+    min-height: 26px;
+    font-size: 1.05em;
+    color: #5d4037;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.3s;
+    margin-bottom: 10px;
+}
+
+.cat-message.visible {
+    opacity: 1;
+}
+
+/* --- АНИМАЦИЯ ФОТО --- */
+.cat-photo.bounce {
+    animation: bounce 0.5s ease;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    30% { transform: translateY(-12px) scale(1.03); }
+    60% { transform: translateY(-4px) scale(1.01); }
+}
+
+/* --- ВСПЛЫВАЮЩЕЕ ЭМОДЗИ (для еды) --- */
+.floater {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.5em;
+    pointer-events: none;
+    animation: floatUp 1.4s ease-out forwards;
+    z-index: 10;
+}
+
+@keyframes floatUp {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-120px) scale(1.6);
+    }
+}
+
+/* --- СЕРДЕЧКИ (для поглаживания) --- */
+.heart {
+    position: absolute;
+    bottom: 50%;
+    font-size: 1.5em;
+    pointer-events: none;
+    animation-name: floatHeart;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    z-index: 10;
+}
+
+@keyframes floatHeart {
+    0% {
+        opacity: 0;
+        transform: translateX(0) translateY(0) scale(0.5) rotate(0deg);
+    }
+    20% {
+        opacity: 1;
+        transform: translateX(calc(var(--drift) * 0.3))
+                   translateY(-30px) scale(1.1) rotate(-10deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(var(--drift))
+                   translateY(-180px) scale(1.4) rotate(15deg);
+    }
+}
+
+/* --- ФАКТ --- */
+.fact {
+    background: #fff3e0;
+    border-radius: 18px;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.fact p {
+    font-size: 1.15em;
+    color: #5d4037;
+    font-style: italic;
+}
+
+/* --- КОНТАКТЫ --- */
+.contacts {
+    text-align: center;
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.contact-links a {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #5d4037;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.contact-links a:hover {
+    background: #4e342e;
+    transform: translateY(-2px);
+}
+
+/* --- FOOTER --- */
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: #8d6e63;
+    font-size: 0.9em;
+}
+
+/* --- АДАПТИВНОСТЬ --- */
+/* ===== АДАПТИВНОСТЬ ===== */
+
+/* --- Планшеты (601–900px) --- */
+@media (max-width: 900px) {
+    section {
+        padding: 40px 15px;
+    }
+
+    .hero h1 {
+        font-size: 2.4em;
+    }
+
+    .hero-cats {
+        font-size: 2.4em;
+    }
+
+    .cats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    .cat-photo {
+        height: 320px;
+    }
+
+    .runner {
+        width: 70px;
+        height: 42px;
+    }
+}
+
+/* --- Телефоны (до 600px) --- */
+@media (max-width: 600px) {
+    section {
+        padding: 30px 12px;
+    }
+
+    /* HERO */
+    .hero {
+        padding: 50px 15px;
+        border-bottom-left-radius: 30% 40px;
+        border-bottom-right-radius: 30% 40px;
+    }
+
+    .hero h1 {
+        font-size: 1.9em;
+        margin-bottom: 10px;
+    }
+
+    .hero p {
+        font-size: 1em;
+    }
+
+    .hero-cats {
+        font-size: 2em;
+        margin-top: 15px;
+    }
+
+    /* Заголовки секций */
+    .cats h2, .fact h2, .contacts h2 {
+        font-size: 1.5em;
+        margin-bottom: 25px;
+    }
+
+    /* Карточки котов — в одну колонку */
+    .cats-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .cat-card {
+        padding: 18px;
+    }
+
+    .cat-photo {
+        height: 260px;
+        object-position: center 25%;
+    }
+
+    .cat-card h3 {
+        font-size: 1.3em;
+    }
+
+    /* Кнопки — крупнее, удобнее для пальца */
+    .cat-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .action-btn {
+        width: 100%;
+        padding: 14px 18px;
+        font-size: 1em;
+        min-height: 48px;
+    }
+
+    /* Счётчики — в две строки */
+    .cat-stats {
+        flex-direction: column;
+        gap: 6px;
+        font-size: 0.95em;
+    }
+
+    /* Миниатюры — крупнее */
+    .cat-thumbs img {
+        width: 75px;
+        height: 75px;
+    }
+
+    /* Факт */
+    .fact {
+        padding: 20px 15px;
+    }
+
+    .fact p {
+        font-size: 1em;
+    }
+
+    /* Контакты */
+    .contact-links {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .contact-links a {
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 1em;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    /* Коты — меньше и прозрачнее, чтобы не мешали */
+    .runner {
+        width: 55px;
+        height: 34px;
+        opacity: 0.6;
+    }
+
+    footer {
+        padding: 20px 15px;
+        font-size: 0.85em;
+    }
+}
+
+/* --- Очень маленькие телефоны (до 380px) --- */
+@media (max-width: 380px) {
+    .hero h1 {
+        font-size: 1.6em;
+    }
+
+    .cat-photo {
+        height: 220px;
+    }
+
+    .runner {
+        display: none;   /* на самых узких экранах коты могут мешать */
+    }
+
+    .cat-thumbs img {
+        width: 65px;
+        height: 65px;
+    }
+}
+
+/* --- Улучшение для тач-устройств --- */
+@media (hover: none) {
+    .action-btn:hover {
+        background: #5d4037;
+        transform: none;
+    }
+
+    .cat-card:hover {
+        transform: none;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
+    .cat-photo:hover {
+        transform: none;
+    }
+}

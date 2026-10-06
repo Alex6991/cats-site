@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Хвостатая банда 🐾</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+        <!-- БЕГАЮЩИЕ КОТЫ -->
+        <!-- БЕГАЮЩИЕ КОТЫ -->
+    <img src="images/cat-orange.svg" alt="" class="runner runner-top" aria-hidden="true">
+    <img src="images/cat-black.svg" alt="" class="runner runner-bottom" aria-hidden="true">
+
+    <!-- HERO -->
+    <header class="hero">
+        <h1>Хвостатая банда 🐾</h1>
+        <p>Дом, в котором живут два кота и много шерсти</p>
+        <div class="hero-cats">😺 😸</div>
+    </header>
+
+    <!-- ГАЛЕРЕЯ КОТОВ -->
+    <section class="cats">
+        <h2>Наши коты</h2>
+
+        <div class="cats-grid">
+            <!-- Рамзес -->
+            <article class="cat-card" data-cat="ramzes">
+                <img src="photos/ramzes-1.jpg" alt="Рамзес" class="cat-photo" id="ramzes-photo">
+                <h3>Рамзес</h3>
+                <div class="cat-meta">
+                    <span>5 лет</span>
+                    <span>Сфинкс</span>
+                </div>
+                <p>Очень ласковый. Спит под одеялом, как человек, и любит сидеть на руках.</p>
+
+                <div class="cat-actions">
+                    <button class="action-btn" onclick="interact('ramzes', 'pet')">
+                        🐾 Погладить
+                    </button>
+                    <button class="action-btn" onclick="interact('ramzes', 'feed')">
+                        🍣 Покормить
+                    </button>
+                </div>
+
+                <div class="cat-stats">
+                    <span>🐾 Погладили: <strong id="ramzes-pet">0</strong></span>
+                    <span>🍣 Покормили: <strong id="ramzes-feed">0</strong></span>
+                </div>
+
+                <div class="cat-message" id="ramzes-message"></div>
+
+                <div class="cat-thumbs">
+                    <img src="photos/ramzes-2.jpg" alt="Рамзес" onclick="swapImage(this)">
+                    <img src="photos/ramzes-3.jpg" alt="Рамзес" onclick="swapImage(this)">
+                </div>
+            </article>
+
+            <!-- Филимон -->
+            <article class="cat-card" data-cat="filimon">
+                <img src="photos/filimon-1.jpg" alt="Филимон" class="cat-photo" id="filimon-photo">
+                <h3>Филимон</h3>
+                <div class="cat-meta">
+                    <span>4 года</span>
+                    <span>Обычный кот</span>
+                </div>
+                <p>Суетной. Проверяет каждую сумку, которая появляется в доме, и везде суёт свой нос.</p>
+
+                <div class="cat-actions">
+                    <button class="action-btn" onclick="interact('filimon', 'pet')">
+                        🐾 Погладить
+                    </button>
+                    <button class="action-btn" onclick="interact('filimon', 'feed')">
+                        🍣 Покормить
+                    </button>
+                </div>
+
+                <div class="cat-stats">
+                    <span>🐾 Погладили: <strong id="filimon-pet">0</strong></span>
+                    <span>🍣 Покормили: <strong id="filimon-feed">0</strong></span>
+                </div>
+
+                <div class="cat-message" id="filimon-message"></div>
+
+                <div class="cat-thumbs">
+                    <img src="photos/filimon-2.jpg" alt="Филимон" onclick="swapImage(this)">
+                    <img src="photos/filimon-3.jpg" alt="Филимон" onclick="swapImage(this)">
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ЗАБАВНЫЙ ФАКТ -->
+    <section class="fact">
+        <h2>Забавный факт 🐾</h2>
+        <p>Рамзес спит под одеялом, как человек. А Филимон проверяет каждую сумку, которая появляется в доме.</p>
+    </section>
+
+    <!-- КОНТАКТЫ -->
+    <section class="contacts">
+        <h2>Хочешь погладить? Пиши!</h2>
+        <div class="contact-links">
+            <a href="https://t.me/AXEL6991" target="_blank">Telegram: @AXEL6991</a>
+            <a href="https://vk.ru/id164463042" target="_blank">VK</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Хвостатая банда. Сделано с любовью 🐾</p>
+    </footer>
+
+    <script>
+        // --- Смена главного фото по клику на миниатюру ---
+        function swapImage(thumb) {
+            const card = thumb.closest('.cat-card');
+            const mainImg = card.querySelector('.cat-photo');
+            const temp = mainImg.src;
+            mainImg.src = thumb.src;
+            thumb.src = temp;
+        }
+
+        // --- Забавные сообщения ---
+        const petMessages = [
+            "Мур-мур! 😻",
+            "Ещё разок! 🐾",
+            "Мрррр... 🐱",
+            "Ты лучший! 💕",
+            "Мяу! 😸"
+        ];
+
+        const feedMessages = [
+            "Спасибо, хозяин! 🍣",
+            "Ням-ням! 😋",
+            "Вкусно! 🐟",
+            "Ещё! 🍗",
+            "Мур! Сытый кот — добрый кот. 😺"
+        ];
+
+        // --- Хранилище счётчиков ---
+        let stats = JSON.parse(localStorage.getItem('catStats') || '{}');
+
+        function ensureCat(cat) {
+            if (!stats[cat]) {
+                stats[cat] = { pet: 0, feed: 0 };
+            }
+        }
+
+        function renderStats(cat) {
+            ensureCat(cat);
+            document.getElementById(cat + '-pet').textContent = stats[cat].pet;
+            document.getElementById(cat + '-feed').textContent = stats[cat].feed;
+        }
+
+        // --- Сообщение на 2 секунды ---
+        function showMessage(cat, text) {
+            const msgEl = document.getElementById(cat + '-message');
+            msgEl.textContent = text;
+            msgEl.classList.add('visible');
+            clearTimeout(msgEl._timer);
+            msgEl._timer = setTimeout(() => {
+                msgEl.classList.remove('visible');
+            }, 2000);
+        }
+
+        // --- Анимация фото + эмодзи ---
+        function animatePhoto(cat, action) {
+            const photo = document.getElementById(cat + '-photo');
+            photo.classList.add('bounce');
+            setTimeout(() => photo.classList.remove('bounce'), 500);
+
+            if (action === 'pet') {
+                spawnHearts(photo.parentElement);
+            } else {
+                spawnFloater(photo.parentElement, '🍣');
+            }
+        }
+
+        // Одно всплывающее эмодзи (для еды)
+        function spawnFloater(container, emoji) {
+            const floater = document.createElement('div');
+            floater.className = 'floater';
+            floater.textContent = emoji;
+            container.appendChild(floater);
+            setTimeout(() => floater.remove(), 1500);
+        }
+
+        // Много сердечек с разными траекториями
+        function spawnHearts(container) {
+            const hearts = ['❤️', '💕', '💖', '💗', '💓', '😻', '🐾'];
+            const count = 6 + Math.floor(Math.random() * 4); // 6–9 сердечек
+
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+
+                const startX = 20 + Math.random() * 60; // 20%–80%
+                heart.style.left = startX + '%';
+
+                const delay = Math.random() * 0.3;
+                const duration = 1.2 + Math.random() * 0.8;
+                const size = 1.2 + Math.random() * 1.2;
+                const drift = (Math.random() - 0.5) * 120;
+
+                heart.style.animationDelay = delay + 's';
+                heart.style.animationDuration = duration + 's';
+                heart.style.fontSize = size + 'em';
+                heart.style.setProperty('--drift', drift + 'px');
+
+                container.appendChild(heart);
+                setTimeout(() => heart.remove(), (delay + duration) * 1000 + 100);
+            }
+        }
+
+        // --- Главная функция ---
+        function interact(cat, action) {
+            ensureCat(cat);
+            stats[cat][action] += 1;
+            localStorage.setItem('catStats', JSON.stringify(stats));
+            renderStats(cat);
+
+            const messages = action === 'pet' ? petMessages : feedMessages;
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+
+            showMessage(cat, randomMessage);
+            animatePhoto(cat, action);
+        }
+
+        // При загрузке — подгружаем счётчики
+        window.addEventListener('DOMContentLoaded', () => {
+            renderStats('ramzes');
+            renderStats('filimon');
+        });
+    </script>
+</body>
+</html>
